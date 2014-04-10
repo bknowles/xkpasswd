@@ -40,30 +40,30 @@ my $config = {
 };
 
 # Add any of the optional config details desired
-$config->{num_words} = 3; # number of words to use in the password
-$config->{case_transform} = 'CAPITAL'; # case transformations to apply to the words
+$config->{num_words} = 4; # number of words to use in the password
+$config->{case_transform} = 'NONE'; # case transformations to apply to the words
                                        # in the password. Valid values are 'NONE',
                                        # 'UPPER' (all caps), 'LOWER' (no caps), 
                                        # 'CAPITAL' (capitalise first letter), or
                                        # 'ALTERNATE' (alternate between all caps
                                        # and no caps on each successive word).
-$config->{custom_separator} = '='; # the character to use to separate the
+$config->{custom_separator} = '-'; # the character to use to separate the
                                    # words in the generated password (if
                                    # not set, or a specialvalue of 'RANDOM'
                                    # is set, a random character is used).
                                    # For no separator at all use the
                                    # special value 'NONE'.
-$config->{prepend_numbers} = 2; # the number of random digits to include befor the
+$config->{prepend_numbers} = 0; # the number of random digits to include befor the
                                 # words in the password
-$config->{append_numbers} = 2; # the number of random digits to include after the
+$config->{append_numbers} = 0; # the number of random digits to include after the
                                # words in the password
-$config->{pad_char} = '*'; # the character to use when padding the front and back
+$config->{pad_char} = '-'; # the character to use when padding the front and back
                            # of the password. If none is specified the separator
                            # character is used. A spcial value of 'RANDOM' can
                            # be passed to randomly pick a padding character
-$config->{pre_pad} = 5; # the number of characters to pad the front of the
+$config->{pre_pad} = 0; # the number of characters to pad the front of the
                         # password with.
-$config->{post_pad} = 5; # the number of characters to padd the end of the
+$config->{post_pad} = 0; # the number of characters to padd the end of the
                          # password with.
 $config->{random_source} = 'PERL'; # the source of randomness to use. Valid
                                    # values are 'PERL' and 'RANDOM_ORG' (if the
