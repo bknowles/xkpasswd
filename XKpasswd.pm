@@ -34,7 +34,7 @@ use Carp;
 # Constructor
 #
 # Arguments:
-# 1) REQUIRED - a hashref with the config varialbes to set up this instance
+# 1) REQUIRED - a hashref with the config variables to set up this instance
 #    The hashref should be index by one or more of the keys below:
 #    REQUIRED keys:
 #       dictionary_file => The path to the text file to load the dictionary from.
@@ -42,7 +42,7 @@ use Carp;
 #                          without leading spaces. Lines starting with a # are
 #                          ignored and can be used to insert credits/copyright
 #                          and other comments into a dictionary file.
-#       min_word_length => The minimum lenght of words to be loaded from the
+#       min_word_length => The minimum length of words to be loaded from the
 #                          dictionary file and used for generating passwords.
 #       max_word_length => The maximum length of words to be loaded from the
 #                          dictionary file and used for generating passwords.
@@ -50,7 +50,7 @@ use Carp;
 #       num_words => the number of words to include in generated passwords
 #                    (defaults to 3).
 #       l33t_substitutions => a hashref of hashrefs indexed by the characters to
-#                             be replaced, andcontaining the replacement strings.
+#                             be replaced, and containing the replacement strings.
 #                             The substitutions are applied only to the words in
 #                             the password, not the separators, padding, or
 #                             numbers. If not set, no substitutions will be
@@ -68,10 +68,10 @@ use Carp;
 #                           separating character between words. A value of
 #                           'RANDOM' will see a random separator used, this is
 #                           the default.
-#       prepend_numbers => The number of digits to pre-pend the list of words.
+#       prepend_numbers => The number of digits to prepend to the list of words.
 #                          Defaults to 3.
 #       append_numbers => The number of digits to append to the end of the list
-#                         of words. Defauls to 3;
+#                         of words. Defaults to 3;
 #       pad_char => the character to use for padding the front and back of the
 #                   password. Valid values are any single character, or the
 #                   special values 'SEPARATOR' (which specifies that the 
@@ -106,7 +106,7 @@ use Carp;
 #                                       '/usr/bin/curl -f -s'
 #                        The default value is 'PERL'.
 #       debug => if set to 1 then the library is put in debug mode, and a lot
-#                of info is prited out. Defaults to 0.
+#                of info is printed out. Defaults to 0.
 # Returns: an XKpasswd instance configured according to the config passed
 # Croaks on error
 sub new{
@@ -123,9 +123,9 @@ sub new{
     
     # add some default values to the new object
     $instance->{MIN_DICTIONARY_SIZE} = 100; # the minimum size of dictionary that can be loaded.
-                                            # if a smaller dictinoary results from trying to load
-                                            # the given file with the given word length contstraints
-                                            # the function to load the dictionary will croak.
+                                            # if a smaller dictionary results from trying to load
+                                            # the given file with the given word length constraints,
+                                            # then the function to load the dictionary will croak.
     $instance->{SEPARATORS} = [q{.}, q{*}, q{-}, q{_}, q{,}, q{#}, q{|}, q{%}, q{^}, q{&}, q{$}, q{=}, q{+}]; # the default set of separators
     
     # deal with debugging
@@ -179,7 +179,7 @@ sub _load_dictionary{
         croak('Failed to read the contents of the dictionary file ('.$this->{dictonary_file}.')');
     }
     
-    # loop through the raw file and load the words matching the criteria defined by word_min_lenght and word_max_length
+    # loop through the raw file and load the words matching the criteria defined by word_min_length and word_max_length
     # into this instance's dictionary property.
     $this->{dictionary} = [];
     my @dictionary_lines = split /\n/sx, $raw_dictionary;
@@ -206,7 +206,7 @@ sub _load_dictionary{
     my $dictionary_size = scalar @{$this->{dictionary}};
     print "\nDEBUG - Loaded $dictionary_size words into the dictionary\n" if $this->{debug};
     unless($dictionary_size >= $this->{MIN_DICTIONARY_SIZE}){
-        croak('Dictionary file '.$this->{dictionary_file}.' did not contain enough words (>= '.$this->{MIN_DICTIONARY_SIZE}.') of lenght '.$this->{min_word_length}.' to '.$this->{max_word_length}.' letters');
+        croak('Dictionary file '.$this->{dictionary_file}.' did not contain enough words (>= '.$this->{MIN_DICTIONARY_SIZE}.') of length '.$this->{min_word_length}.' to '.$this->{max_word_length}.' letters');
     }
     
     # avoid implicit return values
@@ -218,8 +218,8 @@ sub _load_dictionary{
 #
 
 # A PRIVATE instance function to load the optional config arguments into an object
-# and populate any missing values with the defauly values.
-# Aruments: a hashref indexed by the config keys (detailed in the comment for the constructor)
+# and populate any missing values with the default values.
+# Arguments: a hashref indexed by the config keys (detailed in the comment for the constructor)
 # Returns: 1 always
 ## no critic (ProhibitExcessComplexity);
 sub _load_optional_config{
@@ -276,7 +276,7 @@ sub _load_optional_config{
         $this->{adaptive_padding} = $config->{adaptive_padding};
     }
     
-    # ensure we have a source of randomnes set
+    # ensure we have a source of randomness set
     $this->{random_source} = 'PERL';
     if($config->{random_source} && ($config->{random_source} eq 'PERL' || $config->{random_source} eq 'RANDOM_ORG' )){
         if($config->{random_source} eq 'RANDOM_ORG'){
@@ -537,7 +537,7 @@ sub _apply_casetransforms{
 
 # a PRIVATE instance method to calculate the separator to use for this instance.
 # Arguments: NONE
-# Returns a string (though it could be an empty string)
+# Returns: a string (though it could be an empty string)
 sub _get_separator{
     my $this = shift;
     
@@ -556,10 +556,10 @@ sub _get_separator{
     return $this->{SEPARATORS}->[rand scalar @{$this->{SEPARATORS}}];
 }
 
-# a PRIVATE instance method to calcualte the padding character to use for this
+# a PRIVATE instance method to calculate the padding character to use for this
 # instance.
 # Arguments: NONE
-# Returns a string
+# Returns: a string
 sub _get_pad_char{
     my $this = shift;
     
